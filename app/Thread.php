@@ -50,4 +50,12 @@ class Thread extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function replies()
+    {
+        return $this->hasMany(ThreadReply::class);
+    }
 }

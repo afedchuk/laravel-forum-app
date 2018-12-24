@@ -36,4 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/threads/ajax', 'ThreadController@getAjax')->name('dataTable');
 
     Route::get('/threads/{id}', 'ThreadController@view');
+
+    Route::resource('/reply', 'ThreadReplyController', ['only' => ['index', 'create', 'store']]);
+
 });

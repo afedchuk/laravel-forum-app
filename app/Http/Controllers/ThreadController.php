@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ThreadReply;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -19,15 +20,6 @@ use App\DataTables\ThreadDataTable;
 class ThreadController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
-    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -41,9 +33,10 @@ class ThreadController extends Controller
      */
     public function view($id)
     {
-        $thread = Thread::findOrFail($id);
+        $thread = Thread::with('replies')->findOrFail($id);
+        $threadReply = new ThreadReply();
 
-        return view('thread.index', compact('thread'));
+        return view('thread.index', compact('thread','threadReply'));
     }
 
     /**

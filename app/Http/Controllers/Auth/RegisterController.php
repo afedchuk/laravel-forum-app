@@ -45,6 +45,6 @@ class RegisterController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        return redirect()->action('Auth\Login@login');
+        return redirect()->action('Auth\LoginController@login');
     }
 }

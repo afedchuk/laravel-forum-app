@@ -19,8 +19,13 @@ Route::get('/login', 'Auth\LoginController@index')->name('login');
 
 Route::post('/login', 'Auth\LoginController@login');
 
-Route::get('/logout', 'Auth\LoginController@logout');
-
 Route::get('/register', 'Auth\RegisterController@create')->name('register');
 
 Route::post('/register', 'Auth\RegisterController@store');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/logout', 'Auth\LoginController@logout');
+
+    Route::get('/profile', 'ProfileController@index');
+});

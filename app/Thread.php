@@ -41,6 +41,10 @@ class Thread extends Model
                 $threads->take(1)->delete();
             }
         });
+
+        static::deleting(function($thread){
+            $thread->replies->each->delete();
+        });
     }
 
     /**

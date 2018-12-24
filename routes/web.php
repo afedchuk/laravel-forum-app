@@ -23,6 +23,13 @@ Route::get('/register', 'Auth\RegisterController@create')->name('register');
 
 Route::post('/register', 'Auth\RegisterController@store');
 
+Route::group( [ 'prefix' => 'admin'], function()
+{
+    Route::get('/login', 'Admin\Auth\LoginController@index')->name('admin.login');
+
+    Route::post('/login', 'Admin\Auth\LoginController@login');
+});
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/logout', 'Auth\LoginController@logout');
@@ -38,5 +45,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/threads/{id}', 'ThreadController@view');
 
     Route::resource('/reply', 'ThreadReplyController', ['only' => ['index', 'create', 'store']]);
-
 });

@@ -31,7 +31,7 @@ class ThreadRequest extends FormRequest
             'title' => [
                 'required',
                 'min:3',
-                'alpha',
+                'regex:/^[A-Za-z\s-_]+$/',
                 Rule::unique('threads')->ignore($this->id),
             ],
             'content' => [

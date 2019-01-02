@@ -41,7 +41,7 @@ class ThreadPolicy
      */
     public function update(User $user, Thread $thread)
     {
-        return $thread->id == $thread->user_id;
+        return $user->id == $thread->user_id;
     }
 
     /**

@@ -48,7 +48,7 @@ class ThreadController extends Controller
         $thread = Thread::find($id);
 
         if (!auth()->user()->can('update', $thread)) {
-            return redirect()->back();
+            return redirect()->action('ThreadController@index');
         }
 
         return view('thread.form', compact('thread'));
